@@ -1,0 +1,75 @@
+{% extends "main_site/base.html"%}
+{% block content %}
+	{% if user.is_authenticated %}
+	<div class="row main-content ">
+		<div class="col-md-8 columns">
+			{% if messages %}
+				{% for message in messages %}
+					<div class="alert alert-{{ message.tags }}">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endif %}
+			<div class="content-block">
+				<div class="name__block">
+					<a href="#">Портфель</a>
+				</div>
+				<div class="port content__block row d-flex justify-content-around">
+					<div class="miniblock col-md-4">
+						<div class="name__block miniblock">
+							Стоимость
+						</div>
+						<div class="content__block miniblock">
+							8000 руб
+						</div>
+					</div>
+					<div class="miniblock col-md-3">
+						<div class="name__block miniblock">
+							Прибыль
+						</div>
+						<div class="content__block miniblock">
+							+ 1000 руб
+						</div>
+					</div>
+					<div class="miniblock col-md-4">
+						<div class="name__block miniblock">
+							Див. Доходность
+						</div>
+						<div class="content__block miniblock">
+							1000 руб/год
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content-block">
+				<div class="name__block">
+					<a href="#">Рынки</a>
+				</div>
+				<div class="port content__block row d-flex justify-content-around">
+
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 news-block">
+			<div class="content-section">
+				<div class="content-block">
+					<h3>Новости</h3>
+					<p class='text-muted'>Самые последние новости.
+						<ul class="list-group">
+							
+						</ul>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>	
+	{% else %}
+	<div class="main-content">
+		<div class="columns">
+			<div class="content-block center">
+				<h1 class="">Добро пожаловать!</h1>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+{% endblock content %}
