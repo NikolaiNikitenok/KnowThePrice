@@ -80,10 +80,10 @@
               <!-- <a class="nav-item nav-link btn btn-dark me-md-2" href=""><b>New Post</b></a> -->
                 <div class="d-inline-flex align-items-center">
                   <div class="text-profile">
-                    <a class="nav-item nav-link mr-2" href=""><b>{{ user.username }}</b></a>
+                    <a class="nav-item nav-link mr-2" href="{% url 'profile' %}"><b>{{ user.username }}</b></a>
                   </div>
                   <div class="photo-profile">
-                    <img class="rounded-circle" src="{{ user.profile.image.url }}">
+                    <img class="rounded-circle" href="{% url 'profile' %}" src="{{ user.profile.image.url }}">
                   </div>
                 </div>
               <!-- <a class="nav-item nav-link btn btn-dark me-md-2" href="">Logout</a> -->
