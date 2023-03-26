@@ -162,8 +162,15 @@ ul li.nav-item a:hover {
   min-width: 173px;
 }
 
+.columns .content-section {
+  background-color: rgb(61, 61, 73);
+}
+
 .miniblock.col-md-4 {
   min-width: 235px;
+}
+div.border-top small.text {
+  color: rgb(255, 255, 255);
 }
 
 .miniblock.name__block {
@@ -174,6 +181,15 @@ ul li.nav-item a:hover {
 
 .content__block.miniblock {
   font-size: 26px;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+legend, label{
+  color: azure;
+  font-weight: bold;
 }
 
 .article-title {
