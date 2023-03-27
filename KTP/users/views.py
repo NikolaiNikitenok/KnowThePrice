@@ -5,15 +5,25 @@ from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
 def register(request):
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
+        reg_form_u = UserRegisterForm(request.POST)
+        # reg_form_p = ProfileRegisterForm(request.POST)
+        
+        if reg_form_u.is_valid():
+            reg_form_u.save()
+            # reg_form_p.save()
+            username = reg_form_u.cleaned_data.get('username')
             messages.success(request, f'Your accaunt has been created! You are now able to log in')
             return redirect('login')
     else:
-        form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+        reg_form_u = UserRegisterForm()
+        # reg_form_p = ProfileRegisterForm()
+        
+    context = {
+        'reg_form_u': reg_form_u,
+        # 'reg_form_p': reg_form_p
+    }
+    
+    return render(request, 'users/register.html', context)
 
 
 @login_required

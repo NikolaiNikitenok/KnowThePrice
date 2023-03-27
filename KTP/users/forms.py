@@ -6,32 +6,37 @@ from django.forms import ModelForm
 
 
 class UserRegisterForm(UserCreationForm):
-    
     email = forms.EmailField()
     # nickname = forms.CharField()
     # sex = forms.ChoiceField(choices=[Profile.SEX], required=False)
     # date_of_birthday = forms.DateField()
     # country = forms.CharField()
-    
+
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ["username", "email", "password1", "password2"]
         
-        
+# class ProfileRegisterForm(forms.ModelForm):
+#     nickname = forms.CharField()
+    
+#     class Meta:
+#         model = User
+#         fields = ['nickname']
+
+
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
     # nickname = forms.CharField()
     # sex = forms.CharField()
     # date_of_birthday = forms.DateField()
     # country = forms.CharField()
-    
+
     class Meta:
         model = User
-        fields = ['username', 'email']
-        
-        
+        fields = ["username", "email"]
+
+
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['image']
-
+        fields = ["nickname", "image"]
