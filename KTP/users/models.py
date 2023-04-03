@@ -28,18 +28,18 @@ class Profile(models.Model):
     image = models.ImageField(default='default-profile.jpg', 
                               upload_to='profile_pics', 
                               verbose_name='Фото')
-    nickname = models.CharField(max_length=15, 
-                                verbose_name='Никнейм',
-                                unique=True, 
-                                null=True)
+    # nickname = models.CharField(max_length=15, 
+    #                             verbose_name='Никнейм',
+    #                             unique=True, 
+    #                             null=True)
     # tariff_plan = models.ForeignKey('TariffPlan', null=True,
     #                                 on_delete=models.PROTECT, 
     #                                 verbose_name='Тарифный план')
-    # sex = models.CharField(max_length=50,
-    #                         null=True,
-    #                         blank=True,
-    #                         choices=Sex.choices,
-    #                         verbose_name='Пол')
+    sex = models.CharField(max_length=50,
+                            null=True,
+                            blank=True,
+                            choices=Sex.choices,
+                            verbose_name='Пол')
     # date_of_birthday = models.DateField(auto_now=False, 
     #                                         auto_now_add=False, 
     #                                         verbose_name='Дата рождения')

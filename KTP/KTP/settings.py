@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'main_site.apps.MainSiteConfig',
     'users.apps.UsersConfig',
+    'todo_list.apps.TodoListConfig',
     'crispy_forms',
     'crispy_bootstrap5',  # Forgetting this was probably your error
     'django.contrib.admin',
