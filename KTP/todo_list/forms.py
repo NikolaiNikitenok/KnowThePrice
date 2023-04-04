@@ -11,5 +11,5 @@ class ToDoCreateForm(forms.ModelForm):
     
     class Meta:
         model = ToDo
-        fields = ["goal", "status", "deadline"]
+        fields = ["status", "goal", "deadline"]
     

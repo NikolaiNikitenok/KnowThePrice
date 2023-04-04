@@ -1,10 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from .forms import ToDoCreateForm
 
 def todo(request):
-    
-    todo_form = ToDoCreateForm(request.POST)
-    
+    if request.method == 'POST':
+        todo_form = ToDoCreateForm(request.POST)
+        
+        if todo_form.is_valid():
+            todo_form.save()
+            
+            messages.success(request, f'Твоя задача была создана!')
+            return redirect('profile')
+        
+        
+    else:
+        todo_form = ToDoCreateForm()
+        
     context = {
         'todo_form': todo_form,
     }
