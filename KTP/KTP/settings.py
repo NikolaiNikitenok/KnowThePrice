@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+from KTP import secret
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -81,9 +82,9 @@ WSGI_APPLICATION = 'KTP.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'knowtheprice',
-        'USER': 'admin',
-        'PASSWORD': 'nikitenok22012003',
+        'NAME': secret.name,
+        'USER': secret.user,
+        'PASSWORD': secret.password,
         'HOST': 'localhost',
         'PORT': '',
     }
