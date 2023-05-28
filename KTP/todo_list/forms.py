@@ -6,10 +6,11 @@ from django.forms import ModelForm
 
 class ToDoCreateForm(forms.ModelForm):
     goal = forms.CharField()
-    status = forms.BooleanField()
-    deadline = forms.DateField()
+    # title = forms.CharField()
+    # deadline = forms.DateField()
+    category = forms.CharField()
     
     class Meta:
         model = ToDo
-        fields = ["status", "goal", "deadline"]
+        fields = ["category", "goal"]
     

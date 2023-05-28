@@ -34,7 +34,7 @@ def todo(request):
 
 class ToDoCreateView(LoginRequiredMixin, CreateView):
     model = ToDo
-    fields = ['status', 'goal', 'deadline']
+    fields = ['goal', 'deadline']
     
     def form_valid(self, form):
         form.instance.author = self.request.user
