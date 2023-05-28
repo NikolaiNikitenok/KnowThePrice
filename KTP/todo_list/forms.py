@@ -4,13 +4,10 @@ from django import forms
 from .models import ToDo
 from django.forms import ModelForm
 
-class ToDoCreateForm(forms.ModelForm):
-    goal = forms.CharField()
-    # title = forms.CharField()
-    # deadline = forms.DateField()
-    category = forms.CharField()
+# class ToDoCreateForm(forms.ModelForm):
+#     goal = forms.CharField()
+#     deadline = forms.DateField()
     
-    class Meta:
-        model = ToDo
-        fields = ["category", "goal"]
-    
+#     class Meta:
+#         model = ToDo
+#         fields = ["goal", "deadline"]

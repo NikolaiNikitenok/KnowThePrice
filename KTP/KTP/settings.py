@@ -81,12 +81,14 @@ WSGI_APPLICATION = 'KTP.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': secret.name,
-        'USER': secret.user,
-        'PASSWORD': secret.password,
-        'HOST': 'localhost',
-        'PORT': '',
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': secret.name,
+        # 'USER': secret.user,
+        # 'PASSWORD': secret.password,
+        # 'HOST': 'localhost',
+        # 'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

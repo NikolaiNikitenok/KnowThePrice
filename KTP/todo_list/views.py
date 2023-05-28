@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from .models import ToDo
-from .forms import ToDoCreateForm
+# from .forms import ToDoCreateForm
 from django.contrib.auth.models import User
 from django.views.generic import (
     ListView, 
@@ -13,30 +13,23 @@ from django.views.generic import (
 )
 
 def todo(request):
-    if request.method == 'POST':
-        todo_form = ToDoCreateForm(request.POST)
-        
-        if todo_form.is_valid():
-            todo_form.save()
-            
-            messages.success(request, f'Твоя задача была создана!')
-            return redirect('profile')
-        
-        
-    else:
-        todo_form = ToDoCreateForm()
-        
+    todos = ToDo.objects.all()
+    
     context = {
-        'todo_form': todo_form,
+        'todos': todos,
     }
     return render(request, 'todo_list/todo_home.html', context)
 
-
-class ToDoCreateView(LoginRequiredMixin, CreateView):
-    model = ToDo
-    fields = ['goal', 'deadline']
-    
-    def form_valid(self, form):
-        form.instance.author = self.request.user
+def add_todo(request):
+    if request == 'POST':
+        title = request.POST['title']
+        description = request.POST['description']
+        todo = ToDo(title = title, description = description)
+        todo.save()
         
-        return super().form_valid(form)
+        return redirect('todo-home')
+    
+    else:
+        return render(request, 'todo_list/todo_add.html')
+
+# Create your views here.

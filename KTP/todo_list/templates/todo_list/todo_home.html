@@ -1,13 +1,11 @@
 {% extends "main_site/base.html"%}
 {% load crispy_forms_tags %}
 {% block content %}
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="todo">
-      {{ todo_form|crispy }}
-    </div>
-    <div class="form-group">
-      <button class="btn btn-outline-info" type="submit">Добавить</button>
-    </div>
-  </form>
+  <h1>Add New ToDo: <a href="{% url 'todo-add' %}">Add</a></h1>
+  <h1>To-Do List</h1>
+  <ul>
+    {% for todo in todos %}
+      <li>{{ todo.title }}</li>
+    {% endfor %}
+  </ul>
 {% endblock content %}
