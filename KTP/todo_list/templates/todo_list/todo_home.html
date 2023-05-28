@@ -1,11 +1,29 @@
 {% extends "main_site/base.html"%}
+{% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-  <h1>Add New ToDo: <a href="{% url 'todo-add' %}">Add</a></h1>
   <h1>To-Do List</h1>
-  <ul>
+  <a class="nav-link golub" href="{% url 'todo-add' %}"><h1>+ Добавить задачу</h1></a>
+  <h2>Ваши задачи:</h2>
+  
+    <a href="{% url 'category' %}">Настроить категории</a>
+  
     {% for todo in todos %}
-      <li>{{ todo.title }}</li>
+    <div class="content-block">
+      <label for="checkbox">
+        <input type="checkbox"
+        class="checkbox"
+        name="check"
+        value="todo.id"
+        >
+        <span>{{ todo.title }}</span>
+      </label>
+      <div class="todo-description">
+        {{ todo.description }}
+      </div>
+      <br>
+      <span>Закончить до: {{ todo.deadline }}</span>
+    </div>  
     {% endfor %}
-  </ul>
+  
 {% endblock content %}

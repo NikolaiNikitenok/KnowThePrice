@@ -4,10 +4,39 @@
   <h1>Add ToDo</h1>
   <form method="POST">
     {% csrf_token %}
-    <label for="title">Title:</label>
+    <label for="title">Название:</label>
     <input type="text" name="title" id="title">
     <br>
-    <label for="description">Description:</label>
+    <label for="deadline">Сделать до:</label>
+    <input type="date" name="deadline" id="deadline">
+    <br>
+    <label for="category">Категории</label>
+          <div class="control">
+            <div class="select">
+              <select
+                id="category"
+                class="select"
+                name="category_select"
+                required
+              >
+                <!--поставишь такой required, и не надо пустые поляв бд валидизировать. Не повторять в продакшене-->
+                <option class="disabled" value="">
+                  Выберите категорию дела
+                </option>
+                {% for category in categories %}
+                <option
+                  class=""
+                  value="{{ category.name }}"
+                  name="{{ category.name }}"
+                >
+                  {{ category.name }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+    <br>
+    <label for="description">Описание:</label>
     <textarea name="description" id="description"></textarea>
     <br>
     <input type="submit" value="Add ToDo">
