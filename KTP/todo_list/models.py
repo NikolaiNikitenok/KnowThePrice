@@ -15,9 +15,9 @@ class Category(models.Model):
     
 
 class ToDo(models.Model):
-    # profile = models.ForeignKey(User, 
-    #                             on_delete=models.PROTECT,
-    #                             verbose_name='Владелец')
+    author = models.ForeignKey(User, 
+                                on_delete=models.PROTECT,
+                                verbose_name='Владелец')
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=200)
     completed = models.BooleanField(default=False)

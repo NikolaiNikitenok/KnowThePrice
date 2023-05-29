@@ -13,7 +13,7 @@ from django.views.generic import (
 )
 
 def todo(request):
-    todos = ToDo.objects.all()
+    todos = ToDo.objects.filter(author = request.user)
     categories = Category.objects.all()
     
     if request.method == 'POST':
@@ -29,11 +29,12 @@ def todo(request):
 def add_todo(request):
     categories = Category.objects.all()
     if request.method == 'POST':
+        author = request.user
         title = request.POST['title']
         deadline = request.POST['deadline']
         description = request.POST['description']
         category = request.POST['category_select']
-        todo = ToDo(title = title, description = description, deadline = deadline, category=Category.objects.get(name=category))
+        todo = ToDo(title = title, description = description, deadline = deadline, category=Category.objects.get(name=category), author=author)
         todo.save()
         
         context = {
