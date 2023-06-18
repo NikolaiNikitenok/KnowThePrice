@@ -30,7 +30,8 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('todo/', todo_views.todo, name='todo-home'),
     path('todo_add/', todo_views.add_todo, name = 'todo-add'),
-    path('category/', todo_views.add_category, name='category')
+    path('category/', todo_views.add_category, name='category'),
+    path('completed_todo/', todo_views.completed_todo, name='completed-todo')
 ]
 
 if settings.DEBUG:

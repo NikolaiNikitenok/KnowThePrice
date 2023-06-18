@@ -5,6 +5,9 @@ from django.utils import timezone
 
 class Category(models.Model):
     name = models.CharField(max_length=180)
+    author = models.ForeignKey(User, 
+                                on_delete=models.PROTECT,
+                                verbose_name='Владелец')
     
     class Meta:
         verbose_name = 'Категория'

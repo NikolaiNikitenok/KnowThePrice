@@ -3,27 +3,69 @@
 {% load crispy_forms_tags %}
 {% block content %}
   <h1>To-Do List</h1>
-  <a class="nav-link golub" href="{% url 'todo-add' %}"><h1>+ Добавить задачу</h1></a>
-  <h2>Ваши задачи:</h2>
-  
-    <a href="{% url 'category' %}">Настроить категории</a>
-  
+  <div class="row flex-lg-row">
+    <div class="col text-center">
+      <form action="{% url 'todo-add' %}" method="get">
+        <button type="submit" class="btn btn-info">+ Добавить задачу</button>
+      </form>
+    </div>
+    <div class="col text-center">
+      <form action="{% url 'completed-todo' %}" method="get">
+        <button type="submit" class="btn btn-secondary">Посмотреть выполненные задачи</button>
+      </form>
+    </div>
+    <div class="col text-center">
+      <form action="{% url 'category' %}" method="get">
+        <button type="submit" class="btn btn-info">Настроить категории</button>
+      </form>
+    </div>
+  </div>
+  <form action="" method="post">
+    <div class="row flex-lg-row">
+      <div class="col text-center">
+        {% csrf_token %}
+        <button class="btn btn-danger" name="Delete" formnovalidate="" type="submit">
+          <span> Удалить отмеченные задачи </span>
+        </button>
+      </div>
+      <div class="col text-center">
+        <button class="btn btn-success" name="Complete" formnovalidate="" type="submit">
+          <span> Выполнить отмеченные задачи </span>
+        </button>
+      </div>
+    </div>
+    <h2>Ваши задачи:</h2>
     {% for todo in todos %}
     <div class="content-block">
-      <label for="checkbox">
-        <input type="checkbox"
-        class="checkbox"
-        name="check"
-        value="todo.id"
-        >
-        <span>{{ todo.title }}</span>
-      </label>
-      <div class="todo-description">
-        {{ todo.description }}
+      <div class="d-flex p-2 justify-content-left">
+        <label for="checkbox">
+          <input type="checkbox"
+          class="btn-check"
+          name="check"
+          value="{{ todo.id }}"
+          id="cb{{todo.id}}"
+          >
+          <label for="cb{{todo.id}}" class="btn btn-outline-primary">✔</label>
+        </label>
+        <h3 class="text-center ms-3">{{ todo.title }}</h3>
+        <button class="btn btn-success ms-3" name="Complete" formnovalidate="" type="submit">
+          <span> Выполнить </span>  
+        </button>
       </div>
       <br>
-      <span>Закончить до: {{ todo.deadline }}</span>
+      <h5>{{ todo.description }}</h5>
+      <br>
+      <h5 class="text-light">Категория: {{ todo.category }}</h5>
+      <br>
+      <button class="btn btn-danger" name="Delete" formnovalidate="" type="submit" value="{{todo.id}}">
+        <span> Удалить </span>
+      </button>
+      <br>
+      <h6 class="text-end">Закончить до: {{ todo.deadline }}</h6>
     </div>  
+
+
     {% endfor %}
+  </form>
   
 {% endblock content %}

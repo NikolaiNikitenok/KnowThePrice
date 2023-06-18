@@ -7,33 +7,24 @@
   style="min-height: 101vh"
 >
   <div class="column is-half">
+    <form action="{% url 'todo-home' %}" method="get">
+      <button type="submit" class="btn btn-secondary"><-Назад</button>
+    </form>
     <h1 class="is-size-4 has-text-centered">Отредактируйте ваши категории</h1>
     <form action="" method="post">
       {% csrf_token %}
       <!-- csrf для базовой безопасности нашего приложения -->
       <div class="field has-text-centered">
-        <label for="description" class="label has-text-white-bis">
-          Введите категории
-        </label>
-        <div class="control">
-          <input
-            type="text"
-            id="description"
-            class="input"
-            placeholder="Какого рода у вас дела?"
-            name="name"
-            required
-          />
+        <div class="input-group flex-nowrap">
+          <span class="input-group-text" id="addon-wrapping">Категория</span>
+          <input type="text" class="form-control" placeholder="Название категории" aria-label="Username" aria-describedby="addon-wrapping" name="name">
         </div>
-        <div class="field">
-          <button class="button is-primary" name="Add" type="submit">
-            <span class="icon is-small">
-              <i class="fa fa-plus"></i>
-            </span>
+        <div class="field mb-3 mt-3">
+          <button class="btn btn-outline-info" name="Add" type="submit">
             <span>Добавить категорию</span>
           </button>
           <button
-            class="button is-danger"
+            class="btn btn-outline-danger"
             name="Delete"
             formnovalidate=""
             type="submit"
@@ -49,7 +40,7 @@
       <!--  cписок наших категорий -->
       <div class="list is-hoverable">
         {% for category in categories %}
-        <div class="list-item">
+        <!-- <div class="list-item">
           <label class="checkbox">
             <input
               type="checkbox"
@@ -57,8 +48,22 @@
               name="check"
               value="{{category.id}}"
             />
-            <span class="complete-">{{ category.name }}</span>
+            <label class="">{{ category.name }}</label>
           </label>
+        </div> -->
+        <div class="content-block">
+          <div class="d-flex p-2 justify-content-left">
+            <label for="checkbox">
+              <input type="checkbox"
+              class="btn-check"
+              name="check"
+              value="{{ category.id }}"
+              id="cb{{category.id}}"
+              >
+              <label for="cb{{category.id}}" class="btn btn-outline-primary">✔</label>
+            </label>
+            <h3 class="text-center ms-3">{{ category.name }}</h3>
+          </div>
         </div>
         {% endfor %}
       </div>

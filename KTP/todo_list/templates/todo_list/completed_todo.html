@@ -1,0 +1,43 @@
+{% extends "main_site/base.html"%}
+{% load static %}
+{% load crispy_forms_tags %} 
+{% block content %}
+
+<form action="{% url 'todo-home' %}" method="get">
+  <button type="submit" class="btn btn-secondary"><-Назад</button>
+</form>
+
+<h1>Completed To-Do List</h1>
+<form action="" method="post">
+  {% csrf_token %}
+  <div class="row flex-lg-row">
+    <div class="col text-center">
+      <button type="submit" name="Uncomplete" class="btn btn-success">Восстановить выделенные задачи</button>
+    </div>
+  </div>
+
+  <h2>Выполненные задачи:</h2>
+  {% for completed_todo in completed_todos %}
+  <div class="content-block">
+    <div class="d-flex p-2 justify-content-left">
+      <label for="checkbox">
+        <input type="checkbox"
+        class="btn-check"
+        name="check"
+        value="{{ completed_todo.id }}"
+        id="cb{{completed_todo.id}}"
+        >
+        <label for="cb{{completed_todo.id}}" class="btn btn-outline-primary">✔</label>
+      </label>
+      <h3 class="text-center ms-3">{{ completed_todo.title }}</h3>
+    </div>
+    <br>
+    <h5>{{ completed_todo.description }}</h5>
+    <br>
+    <h5 class="text-light">Категория: {{ completed_todo.category }}</h5>
+    <br>
+    <h6 class="text-end">Закончить до: {{ completed_todo.deadline }}</h6>
+  </div>  
+  {% endfor %}
+</form>
+{% endblock %}

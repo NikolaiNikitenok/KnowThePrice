@@ -20,6 +20,16 @@ h6 {
   color: #c2c2c2;
 }
 
+button a {
+  text-decoration: None;
+  color: rgb(20, 198, 20);
+}
+
+button a:hover {
+  text-decoration: None;
+  color: white;
+}
+
 ul {
   margin: 0;
 }
@@ -252,4 +262,8 @@ a.golub h1{
   background-color: gainsboro;
   padding: 3px;
   text-align: center;
+}
+
+.field .btn {
+  margin-right: 20px;
 }

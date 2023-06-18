@@ -1,14 +1,20 @@
 {% extends "main_site/base.html"%}
 
 {% block content %}
-  <h1>Add ToDo</h1>
+<form action="{% url 'todo-home' %}" method="get">
+  <button type="submit" class="btn btn-secondary"><-Назад</button>
+</form>
+
+<h1>Add ToDo</h1>
   <form method="POST">
     {% csrf_token %}
     <label for="title">Название:</label>
     <input type="text" name="title" id="title">
     <br>
     <label for="deadline">Сделать до:</label>
-    <input type="date" name="deadline" id="deadline">
+    <input type="date" class="datetime" name="deadline" id="deadline" 
+    style="background-color: white;
+    ">
     <br>
     <label for="category">Категории</label>
           <div class="control">
