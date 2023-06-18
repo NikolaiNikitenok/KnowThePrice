@@ -3,7 +3,8 @@
 {% load crispy_forms_tags %}
 {% block content %}
   <h1>To-Do List</h1>
-  <div class="row flex-lg-row">
+  <hr style="height: 4px; color: white;">
+  <div class="row flex-lg-row mt-4 mb-0">
     <div class="col text-center">
       <form action="{% url 'todo-add' %}" method="get">
         <button type="submit" class="btn btn-info">+ Добавить задачу</button>
@@ -20,8 +21,9 @@
       </form>
     </div>
   </div>
+  <hr style="height: 2px; color: white">
   <form action="" method="post">
-    <div class="row flex-lg-row">
+    <div class="row flex-lg-row mt-4 mb-4">
       <div class="col text-center">
         {% csrf_token %}
         <button class="btn btn-danger" name="Delete" formnovalidate="" type="submit">
@@ -34,6 +36,7 @@
         </button>
       </div>
     </div>
+    <hr style="height: 4px; color: white">
     <h2>Ваши задачи:</h2>
     {% for todo in todos %}
     <div class="content-block">
@@ -47,21 +50,26 @@
           >
           <label for="cb{{todo.id}}" class="btn btn-outline-primary">✔</label>
         </label>
-        <h3 class="text-center ms-3">{{ todo.title }}</h3>
-        <button class="btn btn-success ms-3" name="Complete" formnovalidate="" type="submit">
-          <span> Выполнить </span>  
-        </button>
+        <h3 class="text-center ms-3 text-light">
+          {{ todo.title }}
+        </h3>
       </div>
       <br>
       <h5>{{ todo.description }}</h5>
       <br>
-      <h5 class="text-light">Категория: {{ todo.category }}</h5>
-      <br>
-      <button class="btn btn-danger" name="Delete" formnovalidate="" type="submit" value="{{todo.id}}">
-        <span> Удалить </span>
-      </button>
-      <br>
-      <h6 class="text-end">Закончить до: {{ todo.deadline }}</h6>
+      <div class="d-flex justify-content-between">
+        <h5 class="">Категория: {{ todo.category }}</h5>
+        <h6 class="">Закончить до: {{ todo.deadline }}</h6>
+      </div>
+      <hr style="height: 2px; color: white;">
+      <div class="d-flex justify-content-between ms-3 me-3">
+        <button class="btn btn-success" name="Complete" formnovalidate="" type="submit">
+          <span> Выполнить </span>  
+        </button>
+        <button class="btn btn-danger ms-4" name="Delete" formnovalidate="" type="submit" value="{{todo.id}}">
+          <span> Удалить </span>
+        </button>
+      </div>
     </div>  
 
 

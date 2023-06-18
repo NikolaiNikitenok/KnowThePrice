@@ -8,43 +8,68 @@
 <h1>Add ToDo</h1>
   <form method="POST">
     {% csrf_token %}
-    <label for="title">Название:</label>
-    <input type="text" name="title" id="title">
+    <div class="input-group flex-nowrap">
+      <span class="input-group-text" id="addon-wrapping">Название</span>
+      <input type="text" class="form-control" placeholder="Название задачи" aria-label="Title" aria-describedby="addon-wrapping" name="title">
+    </div>
     <br>
-    <label for="deadline">Сделать до:</label>
+    <!-- <label for="deadline">Сделать до:</label>
     <input type="date" class="datetime" name="deadline" id="deadline" 
     style="background-color: white;
-    ">
+    color: gray;
+    font-weight: bold;
+    border-radius: 5px;
+    "> -->
+    <div class="input-group flex-nowrap">
+      <span class="input-group-text" id="addon-wrapping">Выполнить до</span>
+      <input type="date" class="form-control" placeholder="Дата" aria-label="Title" aria-describedby="addon-wrapping" name="deadline">
+    </div>
     <br>
-    <label for="category">Категории</label>
-          <div class="control">
-            <div class="select">
-              <select
-                id="category"
-                class="select"
-                name="category_select"
-                required
-              >
-                <!--поставишь такой required, и не надо пустые поляв бд валидизировать. Не повторять в продакшене-->
-                <option class="disabled" value="">
-                  Выберите категорию дела
-                </option>
-                {% for category in categories %}
-                <option
-                  class=""
-                  value="{{ category.name }}"
-                  name="{{ category.name }}"
-                >
-                  {{ category.name }}
-                </option>
-                {% endfor %}
-              </select>
-            </div>
-          </div>
+    <!-- <label for="category">Категории</label>
+      <div class="control">
+        <div class="select">
+          <select
+            id="category"
+            class="select"
+            name="category_select"
+            required
+          >
+            <option class="disabled" value="">
+              Выберите категорию дела
+            </option>
+            {% for category in categories %}
+            <option
+              class=""
+              value="{{ category.name }}"
+              name="{{ category.name }}"
+            >
+              {{ category.name }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+      </div> -->
+      <div class="form-floating">
+        <select class="form-select" id="floatingSelect" name="category_select" aria-label="Floating label select example">
+          <option required>Можно выбрать 1 категорию из списка</option>
+          {% for category in categories %}
+          <option
+            class=""
+            value="{{ category.name }}"
+            name="{{ category.name }}"
+          >
+            {{ category.name }}
+          </option>
+          {% endfor %}
+        </select>
+        <label for="floatingSelect" style="color: rgb(43, 42, 42);">Выбор категории</label>
+      </div>
     <br>
-    <label for="description">Описание:</label>
-    <textarea name="description" id="description"></textarea>
+    <div class="form-floating">
+      <textarea class="form-control" placeholder="Оставьте здесь описание задачи, если нужно :)" id="floatingTextarea" name="description" style="height: 60px" ></textarea>
+      <label for="floatingTextarea" style="color: rgb(43, 42, 42);">Описание</label>
+    </div>
     <br>
-    <input type="submit" value="Add ToDo">
+    <button type="submit" class="btn btn-outline-light">Добавить Задачу</button>
   </form>
 {% endblock %}
