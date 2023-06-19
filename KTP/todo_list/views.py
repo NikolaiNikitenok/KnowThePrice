@@ -39,6 +39,7 @@ def todo(request):
         'todos': todos,
         'categories': categories,
         'check': len(check), # Проблема, показывается кол-во только после отправления запроса
+        'title': 'ToDo-List'
     }
     return render(request, 'todo_list/todo_home.html', context)
 
@@ -55,6 +56,7 @@ def completed_todo(request):
     
     context = {
         'completed_todos': completed_todos,
+        'title': 'Completed ToDo'
     }
     return render(request, 'todo_list/completed_todo.html', context)
 
@@ -76,6 +78,7 @@ def add_todo(request):
         
         context = {
             'categories': categories,
+            'title': 'Add ToDo'
         }
         
         return redirect('todo-home')
@@ -83,6 +86,7 @@ def add_todo(request):
     else:
         context = {
             'categories': categories,
+            'title': 'Add ToDo'
         }
         
         return render(request, 'todo_list/todo_add.html', context)
@@ -108,5 +112,5 @@ def add_category(request):
                 except BaseException:  # вне сомнения тут нужно нормально переписать обработку ошибок,
                     # но на первое время хватит и этого
                     return HttpResponse('<h1>Сначала удалите карточки с этими категориями)</h1>')
-    return render(request, "todo_list/category.html", {"categories": categories})
+    return render(request, "todo_list/category.html", {"categories": categories, 'title': 'Add Category'})
 # Create your views here.

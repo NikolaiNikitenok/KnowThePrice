@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from users import views as user_views
 from todo_list import views as todo_views
+from blog import views as blog_views
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -31,7 +32,8 @@ urlpatterns = [
     path('todo/', todo_views.todo, name='todo-home'),
     path('todo_add/', todo_views.add_todo, name = 'todo-add'),
     path('category/', todo_views.add_category, name='category'),
-    path('completed_todo/', todo_views.completed_todo, name='completed-todo')
+    path('completed_todo/', todo_views.completed_todo, name='completed-todo'),
+    path('blog/', blog_views.lenta, name='blog-lenta')
 ]
 
 if settings.DEBUG:
