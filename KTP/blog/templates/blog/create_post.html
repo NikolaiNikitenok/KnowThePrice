@@ -1,0 +1,46 @@
+{% extends "main_site/base.html"%}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<form action="{% url 'blog-lenta' %}" method="get">
+  <button type="submit" class="btn btn-secondary"><-Назад</button>
+</form>
+
+<h1>Создание поста</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="input-group flex-nowrap">
+      <span class="input-group-text" id="addon-wrapping">Название</span>
+      <input type="text" class="form-control" placeholder="Название поста" aria-label="Title" aria-describedby="addon-wrapping" name="title">
+    </div>
+    <br>
+      <div class="form-floating">
+        <select class="form-select" id="floatingSelect" name="category_select" aria-label="Floating label select example">
+          {% for category in categories %}
+          <option
+            class=""
+            value="{{ category.name }}"
+            name="{{ category.name }}"
+          >
+            {{ category.name }}
+          </option>
+          {% endfor %}
+        </select>
+        <label for="floatingSelect" style="color: rgb(43, 42, 42);">Выбор категории</label>
+      </div>
+    <br>
+    <div class="form-floating">
+      <textarea class="form-control" placeholder="Оставьте здесь описание поста, если нужно :)" id="floatingTextarea" name="description"></textarea>
+      <label for="floatingTextarea" style="color: rgb(43, 42, 42);">Описание</label>
+    </div>
+    <br>
+    <div class="form-floating">
+      <textarea class="form-control" placeholder="Оставьте здесь тэги поста, если нужно :)" id="floatingTextarea" name="tags" style="height: 60px" ></textarea>
+      <label for="floatingTextarea" style="color: rgb(43, 42, 42);">Тэги</label>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-outline-light" name="Create">Создать пост</button>
+  </form>
+
+{% endblock %}

@@ -3,15 +3,43 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-{% for post in posts %}
+<form action="{% url 'create-post' %}" method="get">
+  <button type="submit" class="btn btn-outline-info">Создать пост</button>
+</form>
 
+{% for post in posts %}
 <div class="content-block">
-  <div class="d-flex p-2 justify-content-left">
-    <h3 class="text-center ms-3 text-light">
-      {{ post.title }}
-    </h3>
+  <div class="d-inline-flex align-items-center">
+    <div class="photo-profile">
+      <a href=""
+        ><img
+          class="rounded-circle"
+          src="{{ post.author.profile.image.url }}"
+          style="width: 50px;"
+      /></a>
+    </div>
+    <div class="text-profile">
+      <a class="nav-item nav-link text-light pe-1" href=""
+        ><b>{{ post.author.username }}</b></a
+      >
+    </div>
+    <div class="status">
+      {% if post.author.is_superuser %}
+      <h5>✓</h5>
+      {% else %}
+      {% endif %}
+    </div>
+    <div class="category disabled ms-3 p-1" style="background-color: rgb(133, 180, 165); border-radius: 5px">{{ post.category }}</div>
   </div>
-  <br>
+  <div class="d-flex p-2 justify-content-left">
+    <h4 class="text-center ms-3 text-light">
+      {{ post.title }}
+    </h4>
+  </div>
+<!-- <h6 class="align-middle">{{ post.category }}</h6> -->
+
+  <hr class=" mt-0 text-light">
+  <h6 class="ms-3 text-light">{{ post.description }}</h6>
 </div>
 {% endfor %}
 

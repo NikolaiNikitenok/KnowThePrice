@@ -33,7 +33,8 @@ urlpatterns = [
     path('todo_add/', todo_views.add_todo, name = 'todo-add'),
     path('category/', todo_views.add_category, name='category'),
     path('completed_todo/', todo_views.completed_todo, name='completed-todo'),
-    path('blog/', blog_views.lenta, name='blog-lenta')
+    path('blog/', blog_views.lenta, name='blog-lenta'),
+    path('create_post/', blog_views.create_post, name='create-post')
 ]
 
 if settings.DEBUG:
