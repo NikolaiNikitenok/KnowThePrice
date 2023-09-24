@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'todo_list.apps.TodoListConfig',
     'blog.apps.BlogConfig',
+    'news.apps.NewsConfig',
     'crispy_forms',
     'crispy_bootstrap5',  # Forgetting this was probably your error
     'django.contrib.admin',

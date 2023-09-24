@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="ru">
   <head>
@@ -202,7 +203,18 @@
 							<h3>Новости</h3>
 							<p class='text-muted'>Самые последние новости.
 								<ul class="list-group">
-									
+									{% for new, des, i in mylist %}
+                    <div class="news_one">
+                      
+                      <h1>{{ value|linebreaks }}{{ new }}</h1> 
+                      <hr style="color: white;">
+                      <img src="{{ i }}" alt="" style="width: 300px;">
+                      <hr style="color: white;">
+                      <h4>{{ value|linebreaks }}{{ des }}</h4>
+                      
+                    </div>
+                    <br>
+                  {% endfor %}
 								</ul>
 							</p>
 						</div>

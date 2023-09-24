@@ -1,0 +1,20 @@
+{% extends "main_site/base.html"%}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block news %}
+
+
+  {% for new, des, i in mylist %}
+  <div class="news_one">
+      
+      <h1>{{ value|linebreaks }}{{ new }}</h1> 
+      <hr style="color: white;">
+      <img src="{{ i }}" alt="" style="width: 300px;">
+      <hr style="color: white;">
+      <h4>{{ value|linebreaks }}{{ des }}</h4>
+      
+  </div>
+  <br>
+  {% endfor %}
+
+{% endblock news %}

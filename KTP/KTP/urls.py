@@ -19,6 +19,7 @@ from django.contrib.auth import views as auth_views
 from users import views as user_views
 from todo_list import views as todo_views
 from blog import views as blog_views
+from news import views as news_views
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -34,7 +35,8 @@ urlpatterns = [
     path('category/', todo_views.add_category, name='category'),
     path('completed_todo/', todo_views.completed_todo, name='completed-todo'),
     path('blog/', blog_views.lenta, name='blog-lenta'),
-    path('create_post/', blog_views.create_post, name='create-post')
+    path('create_post/', blog_views.create_post, name='create-post'),
+    path('news/', news_views.news_main, name='news-main'),
 ]
 
 if settings.DEBUG:

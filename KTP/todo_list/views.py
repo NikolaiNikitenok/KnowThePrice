@@ -5,6 +5,7 @@ from django.contrib import messages
 from .models import ToDo, Category
 # from .forms import ToDoCreateForm
 from django.contrib.auth.models import User
+from newsapi import NewsApiClient
 # from django.views.generic import (
 #     ListView, 
 #     DetailView, 
@@ -18,6 +19,20 @@ def todo(request):
     todos = ToDo.objects.filter(author = request.user, completed=False)
     categories = Category.objects.all()
     check = []
+    newsapi = NewsApiClient(api_key ='b4c6be38afa44bb3aac18e7a80270e23')
+    top = newsapi.get_top_headlines(sources ='techcrunch')
+
+    l = top['articles']
+    dsc =[]
+    nws =[]
+    im =[]
+
+    for i in range(len(l)):
+      f = l[i]
+      nws.append(f['title'])
+      dsc.append(f['description'])
+      im.append(f['urlToImage'])
+      mylist = zip(nws, dsc, im)
     
     if request.method == 'POST':
         if "Edit" in request.POST:
@@ -39,13 +54,29 @@ def todo(request):
         'todos': todos,
         'categories': categories,
         'check': len(check), # Проблема, показывается кол-во только после отправления запроса
-        'title': 'ToDo-List'
+        'title': 'ToDo-List',
+        "mylist":mylist
     }
     return render(request, 'todo_list/todo_home.html', context)
 
 
 def completed_todo(request):
     completed_todos = ToDo.objects.filter(author = request.user, completed=True)
+    
+    newsapi = NewsApiClient(api_key ='b4c6be38afa44bb3aac18e7a80270e23')
+    top = newsapi.get_top_headlines(sources ='techcrunch')
+
+    l = top['articles']
+    dsc =[]
+    nws =[]
+    im =[]
+
+    for i in range(len(l)):
+      f = l[i]
+      nws.append(f['title'])
+      dsc.append(f['description'])
+      im.append(f['urlToImage'])
+      mylist = zip(nws, dsc, im)
     
     if request.method == 'POST':
         if "Uncomplete" in request.POST:
@@ -56,13 +87,30 @@ def completed_todo(request):
     
     context = {
         'completed_todos': completed_todos,
-        'title': 'Completed ToDo'
+        'title': 'Completed ToDo',
+        "mylist":mylist
     }
     return render(request, 'todo_list/completed_todo.html', context)
 
 
 def add_todo(request):
     categories = Category.objects.filter(author=request.user)
+    
+    newsapi = NewsApiClient(api_key ='b4c6be38afa44bb3aac18e7a80270e23')
+    top = newsapi.get_top_headlines(sources ='techcrunch')
+
+    l = top['articles']
+    dsc =[]
+    nws =[]
+    im =[]
+
+    for i in range(len(l)):
+      f = l[i]
+      nws.append(f['title'])
+      dsc.append(f['description'])
+      im.append(f['urlToImage'])
+      mylist = zip(nws, dsc, im)
+    
     if request.method == 'POST':
         author = request.user
         title = request.POST['title']
@@ -78,7 +126,7 @@ def add_todo(request):
         
         context = {
             'categories': categories,
-            'title': 'Add ToDo'
+            'title': 'Add ToDo',
         }
         
         return redirect('todo-home')
@@ -86,14 +134,31 @@ def add_todo(request):
     else:
         context = {
             'categories': categories,
-            'title': 'Add ToDo'
+            'title': 'Add ToDo',
+            "mylist":mylist
         }
         
         return render(request, 'todo_list/todo_add.html', context)
 
 
 def add_category(request):
+    """ Функция добавления категории """
+    
     categories = Category.objects.filter(author = request.user)
+    newsapi = NewsApiClient(api_key ='b4c6be38afa44bb3aac18e7a80270e23')
+    top = newsapi.get_top_headlines(sources ='techcrunch')
+
+    l = top['articles']
+    dsc =[]
+    nws =[]
+    im =[]
+
+    for i in range(len(l)):
+      f = l[i]
+      nws.append(f['title'])
+      dsc.append(f['description'])
+      im.append(f['urlToImage'])
+      mylist = zip(nws, dsc, im)
     
     if request.method == "POST":  # проверяем что это метод POST
         author = request.user
@@ -112,5 +177,5 @@ def add_category(request):
                 except BaseException:  # вне сомнения тут нужно нормально переписать обработку ошибок,
                     # но на первое время хватит и этого
                     return HttpResponse('<h1>Сначала удалите карточки с этими категориями)</h1>')
-    return render(request, "todo_list/category.html", {"categories": categories, 'title': 'Add Category'})
+    return render(request, "todo_list/category.html", {"categories": categories, 'title': 'Add Category', "mylist":mylist})
 # Create your views here.

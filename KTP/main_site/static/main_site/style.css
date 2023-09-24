@@ -31,6 +31,8 @@ header {
 
     box-shadow: 0 3px 6px rgb(77, 80, 95);
 }
+
+
 .header__logo {
     display: flex;
 
@@ -286,6 +288,11 @@ a.a_logo .header__logo__text {
     border-radius: 7px;
 
     background-color: rgb(50, 50, 62);
+}
+
+.news_one {
+    border: white solid 3px;
+    border-radius: 10px;
 }
 
 

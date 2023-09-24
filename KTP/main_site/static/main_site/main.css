@@ -267,3 +267,21 @@ a.golub h1{
 .field .btn {
   margin-right: 20px;
 }
+
+.news_one {
+  border: rgb(130, 130, 130) solid 1px;
+  border-radius: 10px;
+  padding: 8px;
+  text-align: center;
+}
+.news_one h1 {
+  font-size: 25px;
+  color: white;
+}
+.news_one h4 {
+  font-size: 15px;
+  color: #c2c2c2;
+}
+.news_one img {
+  border-radius: 13px;
+}
